@@ -1,0 +1,55 @@
+KERNIGHANRICHIE
+
+Azt a kifejezést ami pontosvesszővel le van zárva (utasításlezáró jel) utasításnak nevezünk.
+Ezt követően a kacsos zárójelekkel közrefogva tehetjük ide a parancsainkat, deklarációinkat.
+A zárójel végét nem követi pontosvessző.
+
+If else
+
+Akkor használjuk ha valamilyen feltétel bekövetkezésekor akarunk valamit hogy megtörténjen,
+az 'else' nem feltétlenül szükséges. Ha csak egy parancsot akarunk ez után elvégezni nem szükséges
+kapcsos zárójelet használni, de amint többet akarunk szükséges. A jobb átláthatóságért egy parancsnál
+is hasznos lehet. Ezeket egymásba lehet ágyazni és végtelenségig lehet 'if else'-t használni. Viszont
+ha egy pár darabnál többet akarunk ajánlatos a következő parancs használatát megfontolni.
+
+Switch
+
+Ha több irányba el akarjuk ágaztatni a programunkat nagyon hasznos parancs. Itt is megadott feltételeknek
+kell teljesülni hogy egy irányba menjen. Ha nem felel meg egy kritériumnak sem, akkor a default úton fog menni a program, ha raktunk bele default utat. Az egyes elágazások után break-et kell használni.
+
+While, For
+
+Ciklusoknak nevezik őket, a bennük lévő kifejezés elemzése után megtörténnek a benne lévő parancsok, akkor ha igaz a kifejezés. Amint ez megtörtént a kifejezést újra elemzi és addig újra és újra elemzi és végrehajtja a parancsokat ameddig a kifejezés nem lesz hamis.
+
+Do-while
+
+Egyszer mindig végre fog hajtódni, csak ezután nézi meg a kifejezés igazságértékét, és ha igaz megint végrehajtja.
+Addig ezt teszi amig a kifejezés nem lesz hamis
+
+Break, Continue
+
+A break garantálja azt, hogy ki tudjunk lépni egy ciklusból, mielőtt újra kiértékelésre kerülne. A continue pedig a következő iterációs lépést teszi meg.
+
+Goto
+
+Nem egy gyakran használt parancs, különböző cimkékre lehet vele ugrálni, akár eljárás vagy függvényből is ki lehet ugrani.
+
+
+
+BMECPP
+
+
+C++ nyelv használatánál függvényeknél ha nem akarunk paramétert megadni, akkor használni kell a void szót, ha üresen hagyjuk C-ben ez is működőképes, viszont C++-ban nem. Valamint visszatérési értéket kötelező megadni C-vel ellentétben.
+
+A main függvényben használhatjuk az argc változót és az argv-t, ezután return 0-val folytathatjuk, de nem muszáj hiszen alapértelmezettként 0-át ad vissza ha lefutott a programunk sikeresen.
+        
+A bool típus lehet 'true' vagy 'false', rengeteg féleképpen lehet használni, feltétel teljesítése érdekében használják a legtöbbet.
+
+Több bájtos stringek, beépített típus, nem szükséges include-olni.
+
+Változót deklarálás állhat bárhol ahol egyébként utasítás is. Dönthetünk úgy is hogy egyből adunk kezdőértéket, vagy később.
+
+C++-ban lehetőségünk van alapértelmezett értékeket használni, ha nem adtunk meg paramétert a függvénynek. Az argumentumlistában hátulról előre haladva adunk meg alapértelmezett értéket. Híváskor ugyanezt a sorrendet követi.
+
+Függvényeknél C-ben érték szerinti paramerátadást történik, C++-ban pedig hivatkozás szerint van megoldva. Ha módosítani is szeretnénk a paramétert akkor alkalmazzuk ezt a módszert. A kiszemelt paraméterhez hozzáteszunk egy '&' jelet, így tudatjuk, hogy a paraméternek a referenciáját akarjuk használni.
+
