@@ -19,7 +19,9 @@ kell teljesülni hogy egy irányba menjen. Ha nem felel meg egy kritériumnak se
 
 While, For
 
-Ciklusoknak nevezik őket, a bennük lévő kifejezés elemzése után megtörténnek a benne lévő parancsok, akkor ha igaz a kifejezés. Amint ez megtörtént a kifejezést újra elemzi és addig újra és újra elemzi és végrehajtja a parancsokat ameddig a kifejezés nem lesz hamis.
+Ciklusoknak nevezik őket, a bennük lévő kifejezés elemzése után megtörténnek a benne lévő parancsok,
+akkor ha igaz a kifejezés. Amint ez megtörtént a kifejezést újra elemzi és addig újra és újra elemzi
+és végrehajtja a parancsokat ameddig a kifejezés nem lesz hamis.
 
 Do-while
 
@@ -28,28 +30,38 @@ Addig ezt teszi amig a kifejezés nem lesz hamis
 
 Break, Continue
 
-A break garantálja azt, hogy ki tudjunk lépni egy ciklusból, mielőtt újra kiértékelésre kerülne. A continue pedig a következő iterációs lépést teszi meg.
+A break garantálja azt, hogy ki tudjunk lépni egy ciklusból, mielőtt újra kiértékelésre kerülne. A continue pedig 
+a következő iterációs lépést teszi meg.
 
 Goto
 
-Nem egy gyakran használt parancs, különböző cimkékre lehet vele ugrálni, akár eljárás vagy függvényből is ki lehet ugrani.
+Nem egy gyakran használt parancs, különböző cimkékre lehet vele ugrálni, akár eljárás vagy függvényből is ki lehet
+ugrani.
 
 
 
 BMECPP
 
 
-C++ nyelv használatánál függvényeknél ha nem akarunk paramétert megadni, akkor használni kell a void szót, ha üresen hagyjuk C-ben ez is működőképes, viszont C++-ban nem. Valamint visszatérési értéket kötelező megadni C-vel ellentétben.
+C++ nyelv használatánál függvényeknél ha nem akarunk paramétert megadni, akkor használni kell a void szót, 
+ha üresen hagyjuk C-ben ez is működőképes, viszont C++-ban nem. Valamint visszatérési értéket kötelező megadni
+C-vel ellentétben.
 
-A main függvényben használhatjuk az argc változót és az argv-t, ezután return 0-val folytathatjuk, de nem muszáj hiszen alapértelmezettként 0-át ad vissza ha lefutott a programunk sikeresen.
+A main függvényben használhatjuk az argc változót és az argv-t, ezután return 0-val folytathatjuk, de nem muszáj 
+hiszen alapértelmezettként 0-át ad vissza ha lefutott a programunk sikeresen.
         
-A bool típus lehet 'true' vagy 'false', rengeteg féleképpen lehet használni, feltétel teljesítése érdekében használják a legtöbbet.
+A bool típus lehet 'true' vagy 'false', rengeteg féleképpen lehet használni, feltétel teljesítése érdekében 
+használják a legtöbbet.
 
 Több bájtos stringek, beépített típus, nem szükséges include-olni.
 
-Változót deklarálás állhat bárhol ahol egyébként utasítás is. Dönthetünk úgy is hogy egyből adunk kezdőértéket, vagy később.
+Változót deklarálás állhat bárhol ahol egyébként utasítás is. Dönthetünk úgy is hogy egyből adunk kezdőértéket, 
+vagy később.
 
-C++-ban lehetőségünk van alapértelmezett értékeket használni, ha nem adtunk meg paramétert a függvénynek. Az argumentumlistában hátulról előre haladva adunk meg alapértelmezett értéket. Híváskor ugyanezt a sorrendet követi.
+C++-ban lehetőségünk van alapértelmezett értékeket használni, ha nem adtunk meg paramétert a függvénynek.
+Az argumentumlistában hátulról előre haladva adunk meg alapértelmezett értéket. Híváskor ugyanezt a sorrendet követi.
 
-Függvényeknél C-ben érték szerinti paramerátadást történik, C++-ban pedig hivatkozás szerint van megoldva. Ha módosítani is szeretnénk a paramétert akkor alkalmazzuk ezt a módszert. A kiszemelt paraméterhez hozzáteszunk egy '&' jelet, így tudatjuk, hogy a paraméternek a referenciáját akarjuk használni.
+Függvényeknél C-ben érték szerinti paramerátadást történik, C++-ban pedig hivatkozás szerint van megoldva. 
+Ha módosítani is szeretnénk a paramétert akkor alkalmazzuk ezt a módszert. A kiszemelt paraméterhez hozzáteszünk
+egy '&' jelet, így tudatjuk, hogy a paraméternek a referenciáját akarjuk használni.
 
