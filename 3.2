@@ -1,0 +1,48 @@
+S, X, Y "változók"
+a, b, c "konstansok"
+S -> abc, S -> aXbc, Xb -> bX, Xc -> Ybcc, bY -> Yb, aY -> aaX, aY -> aa
+S-ből indulunk ki
+
+S (S -> aXbc)
+aXbc (Xb -> bX)
+abXc (Xc -> Ybcc)
+abYbcc (bY -> Yb)
+aYbbcc (aY -> aaX)
+aaXbbcc (Xb -> bX)
+aabXbcc (Xb -> bX)
+aabbXcc (Xc -> Ybcc)
+aabbYbccc (bY -> Yb)
+aabYbbccc (bY -> Yb)
+aaYbbbccc (aY -> aa)
+aaabbbccc 
+
+S (S -> aXbc)
+aXbc (Xb -> bX)
+abXc (Xc -> Ybcc)
+abYbcc (bY -> Yb)
+aYbbcc (aY -> aa)
+aabbcc
+
+A, B, C "változók"
+a, b, c "konstansok"
+A -> aAB, A -> aC, CB ->b Cc, cB -> Bc, C -> bc
+S-ből indulunk ki
+
+A (A -> aAB)
+aAB ( A -> aAB)
+aaABB ( A -> aAB)
+aaaABBB ( A -> aC)
+aaaaCBBB (CB -> bCc)
+aaaabCcBB (cB -> Bc)
+aaaabCBcB (cB -> Bc)
+aaaabCBBc (CB -> bCc)
+aaaabbCcBc (cB -> Bc)
+aaaabbCBcc (CB -> bCc)
+aaaabbbCccc (C -> bc)
+aaaabbbbcccc
+
+A (A -> aAB)
+aAB ( A -> aC)
+aaCB (CB -> bCc)
+aabCc (C -> bc)
+aabbcc
