@@ -15,7 +15,8 @@ ha egy pár darabnál többet akarunk ajánlatos a következő parancs használa
 Switch
 
 Ha több irányba el akarjuk ágaztatni a programunkat nagyon hasznos parancs. Itt is megadott feltételeknek
-kell teljesülni hogy egy irányba menjen. Ha nem felel meg egy kritériumnak sem, akkor a default úton fog menni a program, ha raktunk bele default utat. Az egyes elágazások után break-et kell használni.
+kell teljesülni hogy egy irányba menjen. Ha nem felel meg egy kritériumnak sem, akkor a default úton fog menni
+a program, ha raktunk bele default utat. Az egyes elágazások után break-et kell használni.
 
 While, For
 
