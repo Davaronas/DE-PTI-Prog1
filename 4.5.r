@@ -1,4 +1,4 @@
-ibrary(neuralnet)
+Library(neuralnet)
 
 a1    <- c(0,1,0,1)
 a2    <- c(0,0,1,1)
