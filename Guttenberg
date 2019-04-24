@@ -66,3 +66,26 @@ Függvényeknél C-ben érték szerinti paramerátadást történik, C++-ban ped
 Ha módosítani is szeretnénk a paramétert akkor alkalmazzuk ezt a módszert. A kiszemelt paraméterhez hozzáteszünk
 egy '&' jelet, így tudatjuk, hogy a paraméternek a referenciáját akarjuk használni.
 
+PICI 
+
+Az első fejezetet a 16. oldaltól érdemes kezdeni olvasni, az előző oldalak a FORTRAN-ról és COBOL-ról szól. Ez a fejezet
+programozási alapfogalmakról szól, a programozásnak a céljáról. Megemlít különböző nyelveket, imperatív és deklaratív nyelveket.
+
+A második fejezet a programozási nyelvek alapeszközeiről, alapfogalmairól szól, mint például karakterkészlet, kulcsszavak,
+lexikális egységek. Általános szabályokat is megismerünk a programozásról. Megtalálhatunk benne különböző nyelvekben példákat hogy ezeket
+bemutassa. Az adattípusokról lesz szó ezt követően, változókról és nevesített konstansokról.
+
+Kifejezésekkel ismerkedhetünk meg a következő, harmadik fejezetben. Operandus, operátor, prefix, inflix, postflix alak. 
+Megemlíti a típuskényszerítési művelet is.
+
+A negyedik fejezetben utasításokról van szó, deklaratív és végrehajtó utasítások. Értékadó utasítás, ugró utasítás(goto),
+elágazó utasítás(if-else,switch), mint példákkal bemutatva.
+
+Az ötödik fejezet a programok szerkezetével, felépítésével foglalkozik. Szó kerül a paraméter adásról. A zárójelek a
+hatáskört kezdetét és végét jelzik.
+
+A hatodik fejezetben az absztrakt adattípusokról tudhatunk meg információkat. Ez egy olyan adattípus ami amely megvalósítja
+a bezárást és az információ elrejtést. Az objektumorientáltságra gondolhatunk főleg. Meghatározott és szigorú
+műveletekkel juthatunk hozzá az értékekhez.
+
+
