@@ -88,4 +88,9 @@ A hatodik fejezetben az absztrakt adattípusokról tudhatunk meg információkat
 a bezárást és az információ elrejtést. Az objektumorientáltságra gondolhatunk főleg. Meghatározott és szigorú
 műveletekkel juthatunk hozzá az értékekhez.
 
+A hetedik és nyolcadik fejezet főleg az Adáról szól.
+
+A kilencedik fejezet pedig a kivételkezelésről szól. Ezzel megtehetjük hogy elvesszük az operációs rendszertől
+a hibakezelés folyamatát.
+
 
