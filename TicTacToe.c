@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#define BOARD_SIZE 4 // Must be betweeen 3 and 8 for playable experience.
-#define SCORE 3 // The amount of X or O needed to win the game. Don't alter this, will break the program.
+#define BOARD_SIZE 8 // Must be betweeen 3 and 8 for playable experience.
+#define SCORE 5 // The amount of X or O needed to win the game. Don't alter this, will break the program.
 
 // TODO Look for bugs (especially cross win shenanigans)
 
@@ -11,8 +11,8 @@ int drawBoard(int boardArray[BOARD_SIZE * BOARD_SIZE])
 {
 	int j = 1;
 	printf("\n\n\n");
-	
-	
+
+
 	for (; j <= BOARD_SIZE * BOARD_SIZE; j++)
 	{
 		if (boardArray[j - 1] != 88 && boardArray[j - 1] != 79)
@@ -20,7 +20,7 @@ int drawBoard(int boardArray[BOARD_SIZE * BOARD_SIZE])
 			boardArray[j - 1] = j;
 			printf("%10d", boardArray[j - 1]);
 		}
-		else if(boardArray[j - 1] == 88)
+		else if (boardArray[j - 1] == 88)
 		{
 			printf("%10c", 'X');
 		}
@@ -28,7 +28,7 @@ int drawBoard(int boardArray[BOARD_SIZE * BOARD_SIZE])
 		{
 			printf("%10c", 'O');
 		}
-		
+
 		if (j % BOARD_SIZE == 0)
 		{
 			printf("\n\n");
@@ -63,8 +63,8 @@ _Bool checkForDraw(int boardArray[])
 
 int main()
 {
-	
-	enum players {Player1, Player2};
+
+	enum players { Player1, Player2 };
 	enum players currentPlayer = Player1;
 	int board[BOARD_SIZE * BOARD_SIZE];
 	int player1Base;
@@ -83,7 +83,7 @@ int main()
 		printf("\n\t\t\t    Tic Tac Toe\n\n\tPlayer 1 (X) \t\t\t\tPlayer 2 (O)");
 		drawBoard(board);
 		int number = 0;
-		switch (currentPlayer) 
+		switch (currentPlayer)
 		{
 		case Player1:
 			printf("Player 1\n");
@@ -104,7 +104,7 @@ int main()
 
 		printf("Give the number of the spot you want to capture!\n");
 		scanf("%d", &number);
-		if (number < 1 || number > (BOARD_SIZE * BOARD_SIZE) || number == NULL)// --------------------------------CHECK IF IN LIMITS-------------------------------
+		if (number < 1 || number >(BOARD_SIZE * BOARD_SIZE) || number == NULL)// --------------------------------CHECK IF IN LIMITS-------------------------------
 		{
 			printf("Invalid number!\n");
 			continue;
@@ -123,89 +123,148 @@ int main()
 			// ---------------------------------------------------------------------RIGHT SIDE CHECK----------------------------------------------------------------------
 			if (index[player1Base + 1] % BOARD_SIZE != 0) // If it is equal then it's the last in a line
 			{
-				 //printf("RIGHT: %d\n", board[player1Base + 1]);
-				if (board[player1Base + 1] == 88)
+				//printf("RIGHT: %d\n", board[player1Base + 1]);
+				if (board[player1Base + 1] == 88) // if it is an X to the right
 				{
-						p1_Left_Right++;
-						// printf("LEFT-RIGHT %d\n", p1_Left_Right);
-						if (p1_Left_Right == SCORE-1)
-						{
-							drawBoard(board);
-							printf("Player 1 won (middle)\n");
-							break;
-						}
+					p1_Left_Right++; // + one neighbour
+					// printf("LEFT-RIGHT %d\n", p1_Left_Right);
 
-						if (board[player1Base+2])
+
+					if (board[player1Base + 2])
+					{
+						if (index[player1Base + 2] % BOARD_SIZE != 0 && board[player1Base + 2] == 88)
 						{
-							if (index[player1Base + 2] % BOARD_SIZE != 0 && board[player1Base + 2] == 88)
-							{								
+							p1_Left_Right++;
+							if (SCORE == 3)
+							{
 								drawBoard(board);
 								printf("Player 1 won (right)\n");
 								break;
 							}
+							if (index[player1Base + 3] % BOARD_SIZE != 0 && board[player1Base + 3] == 88)
+							{
+								p1_Left_Right++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (right)\n");
+									break;
+								}
+								if (index[player1Base + 4] % BOARD_SIZE != 0 && board[player1Base + 4] == 88)
+								{
+									drawBoard(board);
+									printf("Player 1 won (right)\n");
+									break;
+								}
+							}
 						}
+					}
+				}
+				if (p1_Left_Right == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
 				}
 			}
-			
-			// ---------------------------------------------------------------------LEFT SIDE CHECK---------------------------------------------------------------------
-			if ((index[player1Base - 1] + 1) % BOARD_SIZE != 0  )
+
+			// ---------------------------------------------------------------------LEFT SIDE CHECK--------------------------------------------------------------------- 
+			if ((index[player1Base - 1] + 1) % BOARD_SIZE != 0)
 			{
-				 //printf("LEFT: %d\n", board[player1Base - 1]);
+				//printf("LEFT: %d\n", board[player1Base - 1]);
 				if (board[player1Base - 1] == 88)
 				{
 					p1_Left_Right++;
 					//printf("LEFT-RIGHT: %d\n", p1_Left_Right);
-					if (p1_Left_Right == SCORE-1)
-					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
-					
+
 					if (board[player1Base - 2])
 					{
 						if ((index[player1Base - 2] + 1) % BOARD_SIZE != 0 && board[player1Base - 2] == 88)
 						{
-							drawBoard(board);
-							printf("Player 1 won (left)\n");
-							break;
+							p1_Left_Right++;
+							if (SCORE == 3)
+							{
+								drawBoard(board);
+								printf("Player 1 won (left)\n");
+								break;
+							}
+							if ((index[player1Base - 3] + 1) % BOARD_SIZE != 0 && board[player1Base - 3] == 88)
+							{
+								p1_Left_Right++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (left)\n");
+									break;
+								}
+								if ((index[player1Base - 4] + 1) % BOARD_SIZE != 0 && board[player1Base - 4] == 88)
+								{
+									drawBoard(board);
+									printf("Player 1 won (left)\n");
+									break;
+								}
+							}
 						}
 					}
+				}
+				if (p1_Left_Right == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
 				}
 			}
 
 			//----------------------------------------------------------------------UP RIGHT CHECK----------------------------------------------------------------------
 			if (index[player1Base + 1] % BOARD_SIZE != 0 && index[player1Base] > BOARD_SIZE)
 			{
-				 //printf("UP RIGHT: %d\n", board[player1Base - BOARD_SIZE + 1]);
+				//printf("UP RIGHT: %d\n", board[player1Base - BOARD_SIZE + 1]);
 				if (board[player1Base - BOARD_SIZE + 1] == 88)
 				{
 					p1_Up_R_Down_L++;
 					//printf("UP-RIGHT-DOWN-LEFT %d\n",p1_Up_R_Down_L);
-					if (p1_Up_R_Down_L == SCORE-1)
-					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
+
 
 					if (board[player1Base - (2 * BOARD_SIZE) + 2])
 					{
-						if (board[player1Base - (2 * BOARD_SIZE) + 2] == 88)
+						if (index[player1Base - (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0 && board[player1Base - (2 * BOARD_SIZE) + 2] == 88)
 						{
-							if (index[player1Base - (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0)
+							p1_Up_R_Down_L++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
-								printf("Player 1 won(up right)\n");
+								printf("Player 1 won (up right)\n");
 								break;
+							}
+							if (index[player1Base - (3 * BOARD_SIZE) + 3] % BOARD_SIZE != 0 && board[player1Base - (3 * BOARD_SIZE) + 3] == 88)
+							{
+								p1_Up_R_Down_L++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (up right)\n");
+									break;
+								}
+								if (index[player1Base - (4 * BOARD_SIZE) + 4] % BOARD_SIZE != 0 && board[player1Base - (4 * BOARD_SIZE) + 4] == 88)
+								{
+									drawBoard(board);
+									printf("Player 1 won(up right)\n");
+									break;
+								}
 							}
 						}
 					}
 				}
+				if (p1_Up_R_Down_L == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
+				}
 			}
 
 			// ---------------------------------------------------------------------UP LEFT CHECK----------------------------------------------------------------------
-			if ((index[player1Base - 1] + 1) % BOARD_SIZE != 0 && index[player1Base - 1] > BOARD_SIZE)
+			if ((index[player1Base - 1] + 1) % BOARD_SIZE != 0 && index[player1Base - 1] >= BOARD_SIZE)
 			{
 				// printf("NOT IN THE FIRST COLUMN AND NOT IN THE FIRST LINE\n");
 				//printf("UP LEFT: %d\n", board[player1Base - BOARD_SIZE] - 1);
@@ -214,82 +273,149 @@ int main()
 
 					p1_Up_L_Down_R++;
 					//printf("UP-LEFT-DOWN-RIGHT %d\n", p1_Up_L_Down_R);
-					if (p1_Up_L_Down_R == SCORE-1)
-					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
-					
+
+
 					if (board[player1Base - (2 * BOARD_SIZE) - 2])
 					{
+						// printf("2. %d NOT IN THE LAST COLUMN %d AND IS AN X\n", index[player1Base - (2 * BOARD_SIZE) - 2] % BOARD_SIZE != 0, board[player1Base - (2 * BOARD_SIZE) - 2] == 88);
 						if ((index[player1Base - (2 * BOARD_SIZE) - 2] % BOARD_SIZE != 0) && board[player1Base - (2 * BOARD_SIZE) - 2] == 88)
 						{
-							if ((index[player1Base - (2 * BOARD_SIZE) - 2] + 1) % BOARD_SIZE != 0)
+
+							p1_Up_L_Down_R++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
 								printf("Player 1 won (up left)\n");
 								break;
 							}
+							// printf("3. %d NOT IN THE LAST COLUMN %d AND IS AN X\n", index[player1Base - (3 * BOARD_SIZE) - 3] % BOARD_SIZE != 0, board[player1Base - (3 * BOARD_SIZE) - 3] == 88);
+							if ((index[player1Base - (3 * BOARD_SIZE) - 3] % BOARD_SIZE != 0) && board[player1Base - (3 * BOARD_SIZE) - 3] == 88)
+							{
+
+								p1_Up_L_Down_R++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (up left)\n");
+									break;
+								}
+								// printf("4. %d NOT IN THE LAST COLUMN %d AND IS AN X\n", index[player1Base - (4 * BOARD_SIZE) - 4] % BOARD_SIZE != 0, board[player1Base - (4 * BOARD_SIZE) - 4] == 88);
+								if ((index[player1Base - (4 * BOARD_SIZE) - 4] % BOARD_SIZE != 0) || index[player1Base - (4 * BOARD_SIZE) - 4] < BOARD_SIZE)
+								{
+									if (board[player1Base - (4 * BOARD_SIZE) - 4] == 88)
+									{
+										drawBoard(board);
+										printf("Player 1 won (up left)\n");
+										break;
+
+
+									}
+								}
+							}
 						}
 					}
+				}
+				if (p1_Up_L_Down_R == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
 				}
 			}
 
 			// ---------------------------------------------------------------------UP SIDE CHECK----------------------------------------------------------------------
-			if(index[player1Base] > BOARD_SIZE)
+			if (index[player1Base] > BOARD_SIZE)
 			{
-				 //printf("UP: %d\n", board[player1Base - BOARD_SIZE]);
+				//printf("UP: %d\n", board[player1Base - BOARD_SIZE]);
 				if (board[player1Base - BOARD_SIZE] == 88)
 				{
 					p1_Up_Down++;
 					//printf("UP-DOWN: %d\n", p1_Up_Down);
-					if (p1_Up_Down == SCORE-1)
-					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
+
 
 					if (board[player1Base - (2 * BOARD_SIZE)])
 					{
 						if (board[player1Base - (2 * BOARD_SIZE)] == 88)
 						{
-							drawBoard(board);
-							printf("Player won (up)\n");
-							break;
+							p1_Up_Down++;
+							if (SCORE == 3)
+							{
+								drawBoard(board);
+								printf("Player 1 won (up)\n");
+								break;
+							}
+							if (board[player1Base - (3 * BOARD_SIZE)] == 88)
+							{
+								p1_Up_Down++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (up)\n");
+									break;
+								}
+								if (board[player1Base - (4 * BOARD_SIZE)] == 88)
+								{
+									drawBoard(board);
+									printf("Player won (up)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p1_Up_Down == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
+				}
 			}
-			
+
 			// ---------------------------------------------------------------------DOWN RIGHT----------------------------------------------------------------------
 			if ((index[player1Base] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE) && index[player1Base + 1] % BOARD_SIZE != 0)
 			{
-				 //printf("DOWN RIGHT: %d\n", board[player1Base + BOARD_SIZE + 1]);
+				//printf("DOWN RIGHT: %d\n", board[player1Base + BOARD_SIZE + 1]);
 				if (board[player1Base + BOARD_SIZE + 1] == 88)
 				{
 					p1_Up_L_Down_R++;
 					//printf("UP-LEFT-DOWN-RIGHT: %d\n", p1_Up_L_Down_R);
-					if (p1_Up_L_Down_R == SCORE-1)
-					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
+
 
 					if (board[player1Base + (2 * BOARD_SIZE) + 2])
 					{
-						if (board[player1Base + (2 * BOARD_SIZE) + 2] == 88)
+						if (board[player1Base + (2 * BOARD_SIZE) + 2] == 88 && index[player1Base + (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0)
 						{
-							if (index[player1Base + (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0)
+							p1_Up_L_Down_R++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
 								printf("Player 1 won (Down right)\n");
 								break;
 							}
+							if (board[player1Base + (3 * BOARD_SIZE) + 3] == 88 && index[player1Base + (3 * BOARD_SIZE) + 3] % BOARD_SIZE != 0)
+							{
+								p1_Up_L_Down_R++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (Down right)\n");
+									break;
+								}
+								if (board[player1Base + (4 * BOARD_SIZE) + 4] == 88 && index[player1Base + (4 * BOARD_SIZE) + 4] % BOARD_SIZE != 0)
+								{
+									drawBoard(board);
+									printf("Player 1 won (Down right)\n");
+									break;
+								}
+							}
 						}
 					}
+				}
+				if (p1_Up_L_Down_R == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
 				}
 			}
 
@@ -299,52 +425,92 @@ int main()
 				if (board[player1Base + BOARD_SIZE - 1] == 88 && (index[player1Base + BOARD_SIZE - 1] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE))
 				{
 					p1_Up_R_Down_L++;
-					if (p1_Up_R_Down_L == SCORE-1)
-					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
-
 					if (board[player1Base + (2 * BOARD_SIZE) - 2])
 					{
 						if ((index[player1Base + (2 * BOARD_SIZE) - 2] + 1) % BOARD_SIZE != 0 && board[player1Base + (2 * BOARD_SIZE) - 2] == 88 && index[player1Base] > index[1])
 						{
+							p1_Up_R_Down_L++;
+							if (SCORE == 3)
+							{
 								drawBoard(board);
 								printf("Player 1 won (Down left)\n");
 								break;
+							}
+							if ((index[player1Base + (3 * BOARD_SIZE) - 3] + 1) % BOARD_SIZE != 0 && board[player1Base + (3 * BOARD_SIZE) - 3] == 88 && index[player1Base] > index[1])
+							{
+								p1_Up_R_Down_L++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (Down left)\n");
+									break;
+								}
+								if ((index[player1Base + (4 * BOARD_SIZE) - 4] + 1) % BOARD_SIZE != 0 && board[player1Base + (4 * BOARD_SIZE) - 4] == 88 && index[player1Base] > index[1])
+								{
+									drawBoard(board);
+									printf("Player 1 won (Down left)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p1_Up_R_Down_L == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
+				}
 			}
-			
+
 			//----------------------------------------------------------------------DOWN CHECK----------------------------------------------------------------------
 			if (index[player1Base] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE)
 			{
-				 //printf("DOWN: %d\n", board[player1Base + BOARD_SIZE]);
+				//printf("DOWN: %d\n", board[player1Base + BOARD_SIZE]);
 				if (board[player1Base + BOARD_SIZE] == 88)
 				{
 					p1_Up_Down++;
 					//printf("UP-DOWN: %d\n", p1_Up_Down);
-					if (p1_Up_Down == SCORE - 1)
+
+					if (board[player1Base + (2 * BOARD_SIZE)])
 					{
-						drawBoard(board);
-						printf("Player 1 won (middle)\n");
-						break;
-					}
-						if (board[player1Base + (2 * BOARD_SIZE)])
+						if (board[player1Base + (2 * BOARD_SIZE)] == 88)
 						{
-							if (board[player1Base + (2 * BOARD_SIZE)] == 88)
+							p1_Up_Down++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
 								printf("Player 1 won (Down)\n");
 								break;
 							}
+							if (board[player1Base + (3 * BOARD_SIZE)] == 88)
+							{
+								p1_Up_Down++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 1 won (Down)\n");
+									break;
+								}
+								if (board[player1Base + (4 * BOARD_SIZE)] == 88)
+								{
+									drawBoard(board);
+									printf("Player 1 won (Down)\n");
+									break;
+								}
+							}
 						}
+					}
 				}
-				
+				if (p1_Up_Down == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 1 won (middle)\n");
+					break;
+				}
+
 			}
-			
+
 			currentPlayer = Player2;
 			if (checkForDraw(board) == 1)
 			{
@@ -353,235 +519,392 @@ int main()
 				break;
 			}
 		}
+
 		else if (currentPlayer == Player2)// -------------------------------------PLAYER 2 TURN-----------------------------------------------
 		{
 			player2Base = number - 1;
 			board[player2Base] = 79;
-			// printf("PLAYER 2 BASE: %d\n", player2Base);
+			// printf("PLAYER 1 BASE: %d\n", player1Base);
 
-
-
-			// ----------------------------------------------------------------------RIGHT SIDE CHECK---------------------------------------------------------------------- 
+			// ---------------------------------------------------------------------RIGHT SIDE CHECK----------------------------------------------------------------------|
 			if (index[player2Base + 1] % BOARD_SIZE != 0) // If it is equal then it's the last in a line
 			{
 				//printf("RIGHT: %d\n", board[player1Base + 1]);
-				if (board[player2Base + 1] == 79)
+				if (board[player2Base + 1] == 79) // if it is an X to the right
 				{
-					p2_Left_Right++;
-					//printf("LEFT-RIGHT %d\n", p2_Left_Right);
-					if (p2_Left_Right == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
+					p2_Left_Right++; // + one neighbour
+					// printf("LEFT-RIGHT %d\n", p1_Left_Right);
+
 
 					if (board[player2Base + 2])
 					{
 						if (index[player2Base + 2] % BOARD_SIZE != 0 && board[player2Base + 2] == 79)
 						{
-							drawBoard(board);
-							printf("Player 2 won (right)\n");
-							break;
+							p2_Left_Right++;
+							if (SCORE == 3)
+							{
+								drawBoard(board);
+								printf("Player 2 won (right)\n");
+								break;
+							}
+							if (index[player2Base + 3] % BOARD_SIZE != 0 && board[player2Base + 3] == 79)
+							{
+								p2_Left_Right++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down right)\n");
+									break;
+								}
+								if (index[player2Base + 4] % BOARD_SIZE != 0 && board[player2Base + 4] == 79)
+								{
+									drawBoard(board);
+									printf("Player 2 won (right)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p2_Left_Right == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------LEFT SIDE CHECK---------------------------------------------------------------------- 
+			// ---------------------------------------------------------------------LEFT SIDE CHECK---------------------------------------------------------------------|
 			if ((index[player2Base - 1] + 1) % BOARD_SIZE != 0)
 			{
 				//printf("LEFT: %d\n", board[player1Base - 1]);
 				if (board[player2Base - 1] == 79)
 				{
 					p2_Left_Right++;
-					//printf("LEFT-RIGHT: %d\n", p2_Left_Right);
-					if (p2_Left_Right == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
+					//printf("LEFT-RIGHT: %d\n", p1_Left_Right);
 
 					if (board[player2Base - 2])
 					{
 						if ((index[player2Base - 2] + 1) % BOARD_SIZE != 0 && board[player2Base - 2] == 79)
 						{
-							drawBoard(board);
-							printf("Player 2 won (left)\n");
-							break;
+							p2_Left_Right++;
+							if (SCORE == 3)
+							{
+								drawBoard(board);
+								printf("Player 2 won (left)\n");
+								break;
+							}
+							if ((index[player2Base - 3] + 1) % BOARD_SIZE != 0 && board[player2Base - 3] == 79)
+							{
+								p2_Left_Right++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (left)\n");
+									break;
+								}
+								if ((index[player2Base - 4] + 1) % BOARD_SIZE != 0 && board[player2Base - 4] == 79)
+								{
+									drawBoard(board);
+									printf("Player 2 won (left)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p2_Left_Right == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------UP RIGHT CHECK----------------------------------------------------------------------
+			//----------------------------------------------------------------------UP RIGHT CHECK----------------------------------------------------------------------|
 			if (index[player2Base + 1] % BOARD_SIZE != 0 && index[player2Base] > BOARD_SIZE)
 			{
 				//printf("UP RIGHT: %d\n", board[player1Base - BOARD_SIZE + 1]);
 				if (board[player2Base - BOARD_SIZE + 1] == 79)
 				{
 					p2_Up_R_Down_L++;
-					//printf("UP-RIGHT-DOWN-LEFT %d\n", p2_Up_R_Down_L);
-					if (p2_Up_R_Down_L == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
+					//printf("UP-RIGHT-DOWN-LEFT %d\n",p1_Up_R_Down_L);
+
 
 					if (board[player2Base - (2 * BOARD_SIZE) + 2])
 					{
-						if (board[player2Base - (2 * BOARD_SIZE) + 2] == 79)
+						if (index[player2Base - (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0 && board[player2Base - (2 * BOARD_SIZE) + 2] == 79)
 						{
-							if (index[player2Base - (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0)
+							p2_Up_R_Down_L++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
-								printf("Player 2 won(up right)\n");
+								printf("Player 2 won (up right)\n");
 								break;
+							}
+							if (index[player2Base - (3 * BOARD_SIZE) + 3] % BOARD_SIZE != 0 && board[player2Base - (3 * BOARD_SIZE) + 3] == 79)
+							{
+								p2_Up_R_Down_L++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (up right)\n");
+									break;
+								}
+								if (index[player2Base - (4 * BOARD_SIZE) + 4] % BOARD_SIZE != 0 && board[player2Base - (4 * BOARD_SIZE) + 4] == 79)
+								{
+									drawBoard(board);
+									printf("Player 2 won(up right)\n");
+									break;
+								}
 							}
 						}
 					}
 				}
+				if (p2_Up_R_Down_L == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------UP LEFT CHECK----------------------------------------------------------------------
-			if ((index[player2Base - 1] + 1) % BOARD_SIZE != 0 && index[player2Base - 1] > BOARD_SIZE)
+
+			// ---------------------------------------------------------------------UP LEFT CHECK----------------------------------------------------------------------|
+			if ((index[player2Base - 1] + 1) % BOARD_SIZE != 0 && index[player2Base - 1] >= BOARD_SIZE)
 			{
+				// printf("NOT IN THE FIRST COLUMN AND NOT IN THE FIRST LINE\n");
 				//printf("UP LEFT: %d\n", board[player1Base - BOARD_SIZE] - 1);
 				if (board[player2Base - BOARD_SIZE - 1] == 79)
 				{
-
 					p2_Up_L_Down_R++;
-					//printf("UP-LEFT-DOWN-RIGHT %d\n", p2_Up_L_Down_R);
-					if (p2_Up_L_Down_R == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
-
+					//printf("UP-LEFT-DOWN-RIGHT %d\n", p1_Up_L_Down_R);
 					if (board[player2Base - (2 * BOARD_SIZE) - 2])
 					{
 						if ((index[player2Base - (2 * BOARD_SIZE) - 2] % BOARD_SIZE != 0) && board[player2Base - (2 * BOARD_SIZE) - 2] == 79)
 						{
-							if ((index[player2Base - (2 * BOARD_SIZE) - 2] + 1) % BOARD_SIZE != 0)
+							p2_Up_L_Down_R++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
 								printf("Player 2 won (up left)\n");
 								break;
 							}
+							if ((index[player2Base - (3 * BOARD_SIZE) - 3] % BOARD_SIZE != 0) && board[player2Base - (3 * BOARD_SIZE) - 3] == 79)
+							{
+								p2_Up_L_Down_R++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (up left)\n");
+									break;
+								}
+								if ((index[player2Base - (4 * BOARD_SIZE) - 4] % BOARD_SIZE != 0) || (index[player2Base - (4 * BOARD_SIZE) - 4] < BOARD_SIZE))
+								{
+									if (board[player2Base - (4 * BOARD_SIZE) - 4] == 79)
+									{
+										drawBoard(board);
+										printf("Player 2 won (up left)\n");
+										break;
+									}
+								}
+							}
 						}
 					}
 				}
+				if (p2_Up_L_Down_R == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------UP SIDE CHECK---------------------------------------------------------------------- 
+			// ---------------------------------------------------------------------UP SIDE CHECK----------------------------------------------------------------------|
 			if (index[player2Base] > BOARD_SIZE)
 			{
 				//printf("UP: %d\n", board[player1Base - BOARD_SIZE]);
 				if (board[player2Base - BOARD_SIZE] == 79)
 				{
 					p2_Up_Down++;
-					//printf("UP-DOWN: %d\n", p2_Up_Down);
-					if (p2_Up_Down == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
+					//printf("UP-DOWN: %d\n", p1_Up_Down);
+
 
 					if (board[player2Base - (2 * BOARD_SIZE)])
 					{
 						if (board[player2Base - (2 * BOARD_SIZE)] == 79)
 						{
-							drawBoard(board);
-							printf("Player 2 won (up)\n");
-							break;
+							p2_Up_Down++;
+							if (SCORE == 3)
+							{
+								drawBoard(board);
+								printf("Player 2 won (up)\n");
+								break;
+							}
+							if (board[player2Base - (3 * BOARD_SIZE)] == 79)
+							{
+								p2_Up_Down++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (up)\n");
+									break;
+								}
+								if (board[player2Base - (4 * BOARD_SIZE)] == 79)
+								{
+									drawBoard(board);
+									printf("Player 2 won (up)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p2_Up_Down == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------DOWN RIGHT----------------------------------------------------------------------
+			// ---------------------------------------------------------------------DOWN RIGHT----------------------------------------------------------------------|
 			if ((index[player2Base] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE) && index[player2Base + 1] % BOARD_SIZE != 0)
 			{
 				//printf("DOWN RIGHT: %d\n", board[player1Base + BOARD_SIZE + 1]);
 				if (board[player2Base + BOARD_SIZE + 1] == 79)
 				{
 					p2_Up_L_Down_R++;
-					//printf("UP-LEFT-DOWN-RIGHT: %d\n", p2_Up_L_Down_R);
-					if (p2_Up_L_Down_R == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
+					//printf("UP-LEFT-DOWN-RIGHT: %d\n", p1_Up_L_Down_R);
+
 
 					if (board[player2Base + (2 * BOARD_SIZE) + 2])
 					{
-						if (board[player2Base + (2 * BOARD_SIZE) + 2] == 79)
+						if (board[player2Base + (2 * BOARD_SIZE) + 2] == 79 && index[player2Base + (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0)
 						{
-							if (index[player2Base + (2 * BOARD_SIZE) + 2] % BOARD_SIZE != 0)
+							p2_Up_L_Down_R++;
+							if (SCORE == 3)
 							{
 								drawBoard(board);
 								printf("Player 2 won (Down right)\n");
 								break;
 							}
+							if (board[player2Base + (3 * BOARD_SIZE) + 3] == 79 && index[player2Base + (3 * BOARD_SIZE) + 3] % BOARD_SIZE != 0)
+							{
+								p2_Up_L_Down_R++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down right)\n");
+									break;
+								}
+								if (board[player2Base + (4 * BOARD_SIZE) + 4] == 88 && index[player2Base + (4 * BOARD_SIZE) + 4] % BOARD_SIZE != 0)
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down right)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p2_Up_L_Down_R == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------DOWN LEFT----------------------------------------------------------------------
+			// ---------------------------------------------------------------------DOWN LEFT----------------------------------------------------------------------|
 			if ((index[player2Base] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE) && (index[player2Base - 1] + 1) % BOARD_SIZE != 0)
 			{
-				// printf("DOWN LEFT: %d\n", board[player2Base + BOARD_SIZE - 1]);
 				if (board[player2Base + BOARD_SIZE - 1] == 79 && (index[player2Base + BOARD_SIZE - 1] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE))
 				{
 					p2_Up_R_Down_L++;
-					if (p2_Up_R_Down_L == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
-
 					if (board[player2Base + (2 * BOARD_SIZE) - 2])
 					{
-						if ((index[player2Base + (2 * BOARD_SIZE) - 2] + 1) % BOARD_SIZE != 0 && board[player2Base + (2 * BOARD_SIZE) - 2] == 79 && index[player1Base] > index[1])
+						if ((index[player2Base + (2 * BOARD_SIZE) - 2] + 1) % BOARD_SIZE != 0 && board[player2Base + (2 * BOARD_SIZE) - 2] == 79 && index[player2Base] > index[1])
 						{
+							p2_Up_R_Down_L++;
+							if (SCORE == 3)
+							{
 								drawBoard(board);
-								printf("Player 2 won (Down left)\n");
+								printf("Player 2 won (Down)\n");
 								break;
+							}
+							if ((index[player2Base + (3 * BOARD_SIZE) - 3] + 1) % BOARD_SIZE != 0 && board[player2Base + (3 * BOARD_SIZE) - 3] == 79 && index[player2Base] > index[1])
+							{
+								p2_Up_R_Down_L++;
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down)\n");
+									break;
+								}
+								if ((index[player2Base + (4 * BOARD_SIZE) - 4] + 1) % BOARD_SIZE != 0 && board[player2Base + (4 * BOARD_SIZE) - 4] == 79 && index[player2Base] > index[1])
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down left)\n");
+									break;
+								}
+							}
 						}
 					}
 				}
+				if (p2_Up_R_Down_L == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
+				}
 			}
 
-			// ----------------------------------------------------------------------DOWN CHECK----------------------------------------------------------------------
+			//----------------------------------------------------------------------DOWN CHECK----------------------------------------------------------------------
 			if (index[player2Base] < (BOARD_SIZE * BOARD_SIZE) - BOARD_SIZE)
 			{
 				//printf("DOWN: %d\n", board[player1Base + BOARD_SIZE]);
 				if (board[player2Base + BOARD_SIZE] == 79)
 				{
 					p2_Up_Down++;
-					//printf("UP-DOWN: %d\n", p2_Up_Down);
-					if (p2_Up_Down == SCORE - 1)
-					{
-						drawBoard(board);
-						printf("Player 2 won (middle)\n");
-						break;
-					}
+					//printf("UP-DOWN: %d\n", p1_Up_Down);
+
 					if (board[player2Base + (2 * BOARD_SIZE)])
 					{
 						if (board[player2Base + (2 * BOARD_SIZE)] == 79)
 						{
-							drawBoard(board);
-							printf("Player 2 won (Down)\n");
-							break;
+							p2_Up_Down++;
+							if (SCORE == 3)
+							{
+								drawBoard(board);
+								printf("Player 2 won (Down)\n");
+								break;
+							}
+
+							if (board[player2Base + (3 * BOARD_SIZE)] == 79)
+							{
+								if (SCORE == 4)
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down)\n");
+									break;
+								}
+								p2_Up_Down++;
+								if (board[player2Base + (4 * BOARD_SIZE)] == 79)
+								{
+									drawBoard(board);
+									printf("Player 2 won (Down)\n");
+									break;
+								}
+							}
 						}
 					}
+				}
+				if (p2_Up_Down == SCORE - 1)
+				{
+					drawBoard(board);
+					printf("Player 2 won (middle)\n");
+					break;
 				}
 
 			}
