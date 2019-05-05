@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#define BOARD_SIZE 8 // Must be betweeen 3 and 8 for playable experience.
-#define SCORE 5 // The amount of X or O needed to win the game. Don't alter this, will break the program.
+#define BOARD_SIZE 8 // Must be betweeen 3 and 8 for playable experience. Must be higher than(or equal to) SCORE.
+#define SCORE 5 // The amount of X or O needed to win the game. Cannot be smaller than BOARD_SIZE.
 
 // TODO Look for bugs (especially cross win shenanigans)
 
