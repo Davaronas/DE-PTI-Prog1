@@ -54,7 +54,7 @@ public class game_of_life extends JFrame {
         ra.edit_mode = false;
         ra.running = true;
     }
-
+ 
     public void update() {
         ArrayList<ArrayList<Boolean>> entities = new ArrayList<ArrayList<Boolean>>();// = ra.entities;
         int size1 = ra.entities.size();
