@@ -80,6 +80,7 @@ int main()
 
 	while (1) //--------------------------------------GAME STARTS-------------------------------------------
 	{
+		system("cls");
 		printf("\n\t\t\t    Tic Tac Toe\n\n\tPlayer 1 (X) \t\t\t\tPlayer 2 (O)");
 		drawBoard(board);
 		int number = 0;
